@@ -38,7 +38,7 @@ const playAll = () => {
 
 const getData = () => {
 
-  const id: number = Number(route.query.id);
+  const id: number = Number( );
 
   usePlayListDetail(id).then(res => {
     playlist.value = res

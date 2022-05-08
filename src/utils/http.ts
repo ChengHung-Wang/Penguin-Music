@@ -1,4 +1,4 @@
-import axios, {type AxiosRequestConfig} from "axios";
+import axios, {AxiosRequestConfig} from "axios";
 
 axios.defaults.baseURL = localStorage.getItem('BASE_URL')?.toString();
 axios.defaults.timeout = 20 * 1000;

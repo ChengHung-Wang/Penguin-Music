@@ -69,8 +69,10 @@ export async function usePlayListTrackAll(id: number) {
 }
 
 export async function useTopListDetail() {
-    const {list} = await http.get<{ list: TopListDetail[] }>('/toplist/detail')
-    return list
+    const {data} = await http.get<{ data: TopListDetail[] }>('/top/category', {
+        'showDetail': 1
+    })
+    return data
 }
 
 export async function usePlayListCatList() {

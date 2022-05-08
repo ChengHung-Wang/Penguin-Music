@@ -5,6 +5,8 @@ import '@/assets/theme.scss'
 import App from './App.vue'
 import router from './router'
 import "@/utils/extend"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
 
 const app = createApp(App)
 

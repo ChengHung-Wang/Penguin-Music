@@ -1,30 +1,30 @@
 <template>
-  <div class="text-xl pb-5 font-bold">官方榜</div>
-  <div class="grid grid-flow-row grid-cols-2 2xl:grid-cols-4 gap-5">
-    <div v-for="item in topListDetailData.slice(0,4)" :key="item.id"
-         class="flex bg-dc rounded-lg items-center cursor-pointer" @click="toPlaylist(item)">
-      <CoverPlay :name="item.name" :pic-url="item.coverImgUrl" :play-count="item.playCount" class="w-36 flex-shrink-0"
-                 show-play-count/>
-      <div class="px-5 flex-1 flex-shrink-0 flex flex-col">
-        <div class="text-xl font-bold">{{ item.name }}</div>
-        <div class="text-xs text-main mt-2">
-          <div v-for="(track,index) in item.tracks" class="mt-2">
-            <div class="flex">
-              <span class="mr-1">{{ index + 1 }}</span>
-              <div class="flex-auto w-20 truncate">
-                {{ track.first }} - {{ track.second }}
+  <!-- topListDetailData == topListGroup  -->
+  <div class="top-list-group mt-5" v-for="topList in topListDetailData">
+    <div class="row">
+      <div class="col-12" v-if="topList.title != '巅峰榜'">
+        <div class="text-xl pb-3 font-bold">{{ topList.title }}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div v-for="item in topList.list" :key="item.topId" class="col-sm-6 col-xl-4 mb-3">
+        <div class="flex bg-dc rounded-lg items-center cursor-pointer" @click="toPlaylist(item)">
+          <CoverPlay :name="item.label" :pic-url="item.picUrl" :play-count="item.listenNum" class="w-36 flex-shrink-0" show-play-count/>
+          <div class="px-3 flex-1 flex-shrink-0 flex flex-col">
+            <div class="text-xl font-bold">{{ item.label }}</div>
+            <div class="text-xs text-main mt-2">
+              <div v-for="track in item.song" class="mt-2">
+                <div class="flex">
+                  <span class="mr-1">{{ track.rank }}. </span>
+                  <div class="flex-auto w-20 truncate">
+                    {{ track.title }} - {{ track.singerName }}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="text-xl py-5 font-bold">特色榜</div>
-  <div class="grid grid-flow-row grid-cols-5 2xl:grid-cols-10 gap-5">
-    <div v-for="item in topListDetailData.slice(4)" :key="item.id" @click="toPlaylist(item)">
-      <CoverPlay :name="item.name" :pic-url="item.coverImgUrl" :play-count="item.playCount"/>
-      <div class="text-xs mt-2">{{ item.name }}</div>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ onMounted(async () => {
   await getTopListDetailData()
 })
 const toPlaylist = (topListDetail: TopListDetail) => {
-  router.push({name: 'playlist', query: {id: topListDetail.id}})
+  router.push({name: 'playlist', query: {id: topListDetail.topId}})
 }
 </script>
 

@@ -8,6 +8,7 @@ export const useMusicStore = defineStore('music', () => {
 
     const topListDetailData = ref<TopListDetail[]>([])
     const getTopListDetailData = async () => {
+        console.log(topListDetailData);
         if (topListDetailData.value.length) return;
         topListDetailData.value = await useTopListDetail()
     }
